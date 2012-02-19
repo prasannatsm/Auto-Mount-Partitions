@@ -1,0 +1,3 @@
+A simple script to mount all partitions of hard disks when a user logs into the system. Just add this script to your start-up to get it work!!
+
+Partitions are found by reading /proc/partitions file and mounts it using udisks utility
