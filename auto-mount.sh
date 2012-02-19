@@ -48,8 +48,20 @@ do
 		# gnome-mount --device /dev/$i 2&>1 /dev/null
 		if [ $? = 0 ]
 		then
-			echo "Successfully mounted /dev/$i"
-		else
+			is_mounted=`mount | grep $i`
+			if [ $? = 0 ]
+			then
+				echo "Successfully mounted /dev/$i"
+			else
+				udisks --mount /dev/$i
+				if [ $? = 0 ]
+				then
+					echo "Successfully mounted /dev/$i"
+				else
+					echo "Mounting /dev/$i failed"
+				fi
+			fi
+		else			
 			echo "Mounting /dev/$i failed"
 		fi
 		# Modified on Nov 13 2011 to use gvfs-mount instead of gnome-mount
